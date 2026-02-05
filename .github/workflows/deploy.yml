@@ -1,0 +1,32 @@
+name: Deploy to Raspberry Pi
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deploy to Pi
+        run: |
+          echo "🚀 Starting deployment..."
+          cd /home/prime/github-deployment/mcsi.ai
+          git pull origin main
+          echo "✅ Deployment complete at $(date)"
+      
+      - name: Restart PM2 service (if exists)
+        run: |
+          if pm2 list | grep -q "mcsi.ai"; then
+            echo "🔄 Restarting PM2 service..."
+            pm2 restart mcsi.ai
+            echo "✅ Service restarted"
+          else
+            echo "ℹ️  No PM2 service named 'mcsi.ai' found. Skipping restart."
+          fi
+        continue-on-error: true
