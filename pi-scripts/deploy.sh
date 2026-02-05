@@ -27,14 +27,17 @@ echo "✅ Code updated successfully"
 # Log deployment
 echo "[$(date)] Deployment successful" >> "$LOG_FILE"
 
-# Check if PM2 service exists and restart it
+# Check if PM2 service exists and update/restart it
 if pm2 list | grep -q "hello-server"; then
-    echo "🔄 Restarting PM2 service 'hello-server'..."
-    pm2 restart hello-server
-    echo "✅ Service restarted on port 8080"
+    echo "🔄 Updating PM2 service 'hello-server' to new deployment..."
+    pm2 delete hello-server
+    pm2 start "$DEPLOY_DIR/server.js" --name hello-server
+    echo "✅ Service updated and restarted on port 8080"
 else
-    echo "ℹ️  No PM2 service named 'hello-server' found"
-    echo "   To create one, run: pm2 start <your-app> --name hello-server"
+    echo "🆕 Creating new PM2 service 'hello-server'..."
+    pm2 start "$DEPLOY_DIR/server.js" --name hello-server
+    pm2 save
+    echo "✅ Service created and started on port 8080"
 fi
 
 echo ""

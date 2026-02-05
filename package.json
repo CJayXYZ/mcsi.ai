@@ -1,0 +1,18 @@
+{
+  "name": "mcsi.ai",
+  "version": "1.0.0",
+  "description": "Auto-deploying web application hosted on Raspberry Pi",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CJayXYZ/mcsi.ai.git"
+  },
+  "keywords": ["raspberry-pi", "auto-deploy", "github-actions"],
+  "author": "CJay",
+  "license": "MIT"
+}
