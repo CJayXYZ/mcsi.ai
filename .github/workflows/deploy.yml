@@ -22,11 +22,11 @@ jobs:
       
       - name: Restart PM2 service (if exists)
         run: |
-          if pm2 list | grep -q "mcsi.ai"; then
+          if pm2 list | grep -q "hello-server"; then
             echo "🔄 Restarting PM2 service..."
-            pm2 restart mcsi.ai
-            echo "✅ Service restarted"
+            pm2 restart hello-server
+            echo "✅ Service restarted on port 8080"
           else
-            echo "ℹ️  No PM2 service named 'mcsi.ai' found. Skipping restart."
+            echo "ℹ️  No PM2 service named 'hello-server' found. Skipping restart."
           fi
         continue-on-error: true

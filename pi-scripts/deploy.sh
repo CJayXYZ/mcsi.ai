@@ -28,13 +28,13 @@ echo "✅ Code updated successfully"
 echo "[$(date)] Deployment successful" >> "$LOG_FILE"
 
 # Check if PM2 service exists and restart it
-if pm2 list | grep -q "mcsi.ai"; then
-    echo "🔄 Restarting PM2 service 'mcsi.ai'..."
-    pm2 restart mcsi.ai
-    echo "✅ Service restarted"
+if pm2 list | grep -q "hello-server"; then
+    echo "🔄 Restarting PM2 service 'hello-server'..."
+    pm2 restart hello-server
+    echo "✅ Service restarted on port 8080"
 else
-    echo "ℹ️  No PM2 service named 'mcsi.ai' found"
-    echo "   To create one, run: pm2 start <your-app> --name mcsi.ai"
+    echo "ℹ️  No PM2 service named 'hello-server' found"
+    echo "   To create one, run: pm2 start <your-app> --name hello-server"
 fi
 
 echo ""
